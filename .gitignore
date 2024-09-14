@@ -1,0 +1,8 @@
+/.env
+/node_modules
+/faiss.index
+/docstore.json
+/documents
+/data
+.vscode
+package-lock.json
