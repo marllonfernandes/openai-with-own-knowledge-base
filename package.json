@@ -1,7 +1,7 @@
 {
-  "name": "openai-pdf-chatbot",
+  "name": "openai-with-own-knowledge-base",
   "version": "1.0.0",
-  "description": "This is a simple nodejs OPENAI chatbot that allows you chat with your pdf file.",
+  "description": "OpenAI with Own Knowledge Base Este projeto Node.js permite criar um assistente personalizado que utiliza seus próprios documentos como base de conhecimento.",
   "type": "module",
   "main": "app.js",
   "scripts": {
