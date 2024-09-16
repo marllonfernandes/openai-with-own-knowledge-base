@@ -7,10 +7,27 @@ import { TextLoader } from "langchain/document_loaders/fs/text";
 import { CSVLoader } from "@langchain/community/document_loaders/fs/csv";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import path from "path";
+import fs from "fs";
 
-const dirDocs = path.join(path.resolve(), "./documents");
+const dirDocs = path.join(path.resolve(), "documents");
+const dirOutput = path.join(path.resolve(), "data");
 
 export const injest_docs = async () => {
+  if (!fs.existsSync(dirDocs)) {
+    fs.mkdirSync(dirDocs);
+    console.log(`Directory ${path.basename(dirDocs)} created successfully!`);
+  }
+
+  if (!fs.existsSync(dirOutput)) {
+    fs.mkdirSync(dirOutput);
+    console.log(`Directory ${path.basename(dirOutput)} created successfully!`);
+  }
+
+  if (fs.readdirSync(dirDocs).length === 0) {
+    console.log(`Directory ${path.basename(dirDocs)} is empty!`);
+    return;
+  }
+
   // 5. Initialize the document loader with supported file formats
   const loader = new DirectoryLoader(dirDocs, {
     ".json": (p) => new JSONLoader(p),
@@ -38,8 +55,7 @@ export const injest_docs = async () => {
   );
   console.log("saving...");
 
-  const directory = path.join(path.resolve(), "data");
-  await vectorStore.save(directory);
+  await vectorStore.save(dirOutput);
   console.log("saved!");
 };
 
